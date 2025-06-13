@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 5.3//EN"
+"http://hibernate.org/dtd/hibernate-configuration-5.3.dtd">
+<hibernate-configuration> 
+    <session-factory> 
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/bookstoredb?useSSL=false</property>
+        <property name="connection.username">abhishek_user1</property>
+        <property name="connection.password">Qwertyabhishek321!</property>
+
+        <!-- JDBC connection pool settings -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Disable the second-level cache -->
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Mapping files -->
+        <mapping class="com.controllers.entity.Book"/>
+        <mapping class="com.controllers.entity.BookOrder"/>
+        <mapping class="com.controllers.entity.Category"/>
+        <mapping class="com.controllers.entity.Customer"/>
+        <mapping class="com.controllers.entity.OrderDetail"/>
+        <mapping class="com.controllers.entity.Review"/>
+        <mapping class="com.controllers.entity.Users"/>
+        
+    </session-factory>
+</hibernate-configuration>

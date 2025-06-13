@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+	id 'war'
+	id 'org.hibernate.orm' version '6.6.13.Final'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+	implementation "org.hibernate.orm:hibernate-core:6.6.13.Final"
+	annotationProcessor "org.hibernate.orm:hibernate-jpamodelgen:6.6.13.Final"
+	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+	implementation 'com.mysql:mysql-connector-j:8.1.0'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
+}
+
+war {
+    webAppDirName = 'src/main/webapp'
+
+    // Avoid duplicate entry errors
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from('src/main/webapp') {
+        include '**/*'
+        into ''
+    }
+}
+
+
+
+// Enable bytecode enhancement
+hibernate {
+    enhancement {
+        lazyInitialization true
+        dirtyTracking true
+        associationManagement true
+    }
+}
