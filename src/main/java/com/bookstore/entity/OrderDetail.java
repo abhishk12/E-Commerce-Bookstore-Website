@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -51,7 +52,7 @@ public class OrderDetail implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name = "book_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "book_id", nullable = false, insertable = false, updatable = false)
 	public Book getBook() {
 		return book;
 	}
@@ -62,7 +63,7 @@ public class OrderDetail implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name = "order_id", insertable = false, nullable = false, updatable = false)
+	@JoinColumn(name = "order_id", insertable = false, nullable = false, updatable = false)
 	public BookOrder getBookOrder() {
 		return bookOrder;
 	}

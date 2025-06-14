@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>The Book Nook - Administrator</title>
+<title><%= request.getAttribute("pageTitle") %> - Administrator</title>
 <link rel="icon" href="<%= request.getContextPath() %>/images/reading-book.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +31,7 @@
 		<div>
 		<br>
 		<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
-			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="users">Users</a></li>
+			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="list_users">Users</a></li>
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="categories">Categories</a></li>
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="books">Books</a></li>
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="customers">Customers</a></li>

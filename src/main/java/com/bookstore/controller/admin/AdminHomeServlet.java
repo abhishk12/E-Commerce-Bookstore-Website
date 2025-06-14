@@ -17,8 +17,8 @@ public class AdminHomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		response.getWriter().append("Served at: admin ").append(request.getContextPath());
+		request.setAttribute("pageTitle", "The Book Nook");
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

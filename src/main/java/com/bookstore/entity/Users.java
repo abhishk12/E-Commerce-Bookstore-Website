@@ -1,5 +1,8 @@
 package com.bookstore.entity;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +12,10 @@ import jakarta.persistence.Table;
 
 @Entity(name="users")
 @Table(name="users")
+@NamedQueries({
+	@NamedQuery(name = "users.findAll", query = "SELECT u FROM users u ORDER BY u.full_name"),
+	@NamedQuery(name = "users.countAll", query = "SELECT COUNT(*) FROM users")
+})
 public class Users implements java.io.Serializable{
 
 	@Id
