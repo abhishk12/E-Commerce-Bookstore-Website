@@ -113,4 +113,16 @@ class UserDAOTest {
 		assertTrue(cnt==2);
 	}
 	
+	@Test
+	public void testFindByEmail() {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		UserDAO userDAO = new UserDAO(entityManager);
+		Users user = userDAO.findByEmail("abc@gmail.com"); 
+		System.out.println(user.getUser_id());
+		entityManager.close();
+		entityManagerFactory.close();
+		assertNotNull(user);
+	}
+	
 }

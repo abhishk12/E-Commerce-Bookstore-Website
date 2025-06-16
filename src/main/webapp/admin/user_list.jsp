@@ -7,6 +7,14 @@
 	<a href="user_form.jsp">Create New User</a>
 	<hr width="60%">
 	
+	<c:if test="${newUserMessage != null}">
+		<div align="center">
+			<p style="color:MediumSpringGreen;"><i>${newUserMessage}</i></p>
+		</div>
+	</c:if>
+	
+	
+	
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<tr>
