@@ -28,4 +28,10 @@ public class UserServices {
 		System.out.println(listUsers.size());
 		return listUsers;
 	}
+	
+	public void createUser(String email, String fullName, String password) {
+		Users user = new Users(email, fullName, password);
+		userDAO.create(user);
+	}
+	
 }

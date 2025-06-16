@@ -4,7 +4,7 @@
 	<br>
 	
 	<h2>User Management</h2>
-	<a href="">Create New User</a>
+	<a href="user_form.jsp">Create New User</a>
 	<hr width="60%">
 	
 	<div align="center">
