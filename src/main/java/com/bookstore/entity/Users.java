@@ -34,6 +34,15 @@ public class Users implements java.io.Serializable{
 	private String password;
 	
 	
+	
+	public Users(int user_id, String email, String full_name, String password) {
+		super();
+		this.user_id = user_id;
+		this.email = email;
+		this.full_name = full_name;
+		this.password = password;
+	}
+
 	public Users(String email, String full_name, String password) {
 		super();
 		this.email = email;

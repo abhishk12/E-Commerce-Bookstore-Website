@@ -31,7 +31,7 @@
 					<td>${user.email}</td>
 					<td>${user.full_name}</td>
 					<td>
-						<a href="">Edit</a> | <a href="">Delete</a>
+						<a href="edit_user?id=${user.user_id}">Edit</a> | <a href="">Delete</a>
 					</td>
 				</tr>
 			</c:forEach>
