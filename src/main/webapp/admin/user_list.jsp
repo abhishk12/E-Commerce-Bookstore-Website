@@ -9,7 +9,7 @@
 	
 	<c:if test="${newUserMessage != null}">
 		<div align="center">
-			<p style="color:MediumSpringGreen;"><i>${newUserMessage}</i></p>
+			<p style="color:DarkGreen;"><i>${newUserMessage}</i></p>
 		</div>
 	</c:if>
 	
@@ -31,7 +31,7 @@
 					<td>${user.email}</td>
 					<td>${user.full_name}</td>
 					<td>
-						<a href="edit_user?id=${user.user_id}">Edit</a> | <a href="">Delete</a>
+						<a href="edit_user?id=${user.user_id}">Edit</a> | <a href="javascript:confirmDelete(${user.user_id})">Delete</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -41,5 +41,12 @@
 	
 	<hr width="60%">
 	<br><br>
-	
+
+<script type="text/javascript">
+	function confirmDelete(userId){
+		if (confirm("Are you sure you want to delete user with Id: " + userId + " ?")){
+			window.location = "delete_user?id=" + userId;
+		}
+	}	
+</script>	
 <jsp:include page="footer.jsp"></jsp:include>

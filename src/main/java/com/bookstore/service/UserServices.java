@@ -61,6 +61,7 @@ public class UserServices {
 		else {
 			Users user = new Users(email, fullName, password);
 			userDAO.create(user);
+			listUser("User created successfully!");
 		}
 
 		
@@ -93,6 +94,13 @@ public class UserServices {
 		}
 		
 		
+	}
+	
+	public void deleteUser() throws ServletException, IOException{
+		int userId = Integer.parseInt(request.getParameter("id"));
+		
+		userDAO.delete(userId);
+		listUser("User deleted successfully!");
 	}
 	
 }
