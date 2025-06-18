@@ -32,7 +32,7 @@
 		<br>
 		<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="list_users">Users</a></li>
-			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="categories">Categories</a></li>
+			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="list_category">Categories</a></li>
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="books">Books</a></li>
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="customers">Customers</a></li>
 			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="reviews">Reviews</a></li>

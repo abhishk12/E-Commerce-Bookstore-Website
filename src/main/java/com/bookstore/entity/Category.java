@@ -20,7 +20,8 @@ import jakarta.persistence.Table;
 @Table(name="category")
 @NamedQueries({
 	@NamedQuery(name="category.findAll", query="SELECT c FROM category c ORDER BY c.name"),
-	@NamedQuery(name = "category.countAll", query = "SELECT COUNT(*) FROM category")
+	@NamedQuery(name = "category.countAll", query = "SELECT COUNT(*) FROM category"),
+	@NamedQuery(name = "category.findByName", query = "SELECT c FROM category c WHERE c.name = :name")
 })
 public class Category implements Serializable {
 

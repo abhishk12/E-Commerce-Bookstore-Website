@@ -66,5 +66,17 @@ class CategoryDAOTest extends BaseDAOTest {
 		long cnt = categoryDAO.count();
 		assertEquals(cnt, 2);
 	}
+	
+	@Test
+	void testFindByName() {
+		Category category = categoryDAO.findByName("Horror");
+		assertNotNull(category);
+	}
+	
+	@Test
+	void testFindByNameNotFound() {
+		Category category = categoryDAO.findByName("Horr");
+		assertNull(category);
+	}
 
 }

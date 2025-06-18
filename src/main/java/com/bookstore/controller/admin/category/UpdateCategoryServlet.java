@@ -1,4 +1,4 @@
-package com.bookstore.controller.admin;
+package com.bookstore.controller.admin.category;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,21 +7,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.bookstore.service.UserServices;
+import com.bookstore.controller.admin.BaseServlet;
+import com.bookstore.service.CategoryServices;
 
-@WebServlet("/admin/update_user")
-public class UpdateUserServlet extends HttpServlet {
+@WebServlet("/admin/update_category")
+public class UpdateCategoryServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public UpdateUserServlet() {
-        super();
 
+    public UpdateCategoryServlet() {
+        super();
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		UserServices userServices = new UserServices(request, response);
-		userServices.updateUser();
+		CategoryServices categoryServices = new CategoryServices(entityManager, request, response);
+		categoryServices.updateCategory();
 	}
 
 }
