@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,6 +18,10 @@ import jakarta.persistence.Table;
 
 @Entity(name="category")
 @Table(name="category")
+@NamedQueries({
+	@NamedQuery(name="category.findAll", query="SELECT c FROM category c ORDER BY c.name"),
+	@NamedQuery(name = "category.countAll", query = "SELECT COUNT(*) FROM category")
+})
 public class Category implements Serializable {
 
 	private int category_id;

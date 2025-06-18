@@ -14,6 +14,7 @@
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bookstoredb?useSSL=false"/>
 			<property name="jakarta.persistence.jdbc.user" value="abhishek_user1"/>
 			<property name="jakarta.persistence.jdbc.password" value="Qwertyabhishek321!"/>
+			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
 	
