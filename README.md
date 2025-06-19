@@ -29,6 +29,7 @@
 - **Java Server Pages (JSP)**
 - **HTML 5**
 - **CSS**
+- **JavaScript**
 
 ### 2.3 Database
 - **MySQL**
