@@ -125,4 +125,28 @@ class UserDAOTest {
 		assertNotNull(user);
 	}
 	
+	@Test
+	public void testCheckLogin() {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		UserDAO userDAO = new UserDAO(entityManager);
+		boolean flag = userDAO.checkLogin("abc@gmail.com", "123"); 
+
+		entityManager.close();
+		entityManagerFactory.close();
+		assertTrue(flag);
+	}
+	
+	@Test
+	public void testCheckLoginFailed() {
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		UserDAO userDAO = new UserDAO(entityManager);
+		boolean flag = userDAO.checkLogin("abc@gmail.com", "122"); 
+
+		entityManager.close();
+		entityManagerFactory.close();
+		assertFalse(flag);
+	}
+	
 }

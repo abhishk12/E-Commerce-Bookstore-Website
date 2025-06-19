@@ -101,4 +101,19 @@ public class UserServices {
 		listUser("User deleted successfully!");
 	}
 	
+	public void login() throws ServletException, IOException {
+		String email = request.getParameter("admin_email");
+		String password = request.getParameter("admin_password");
+		boolean flag = userDAO.checkLogin(email, password);
+		
+		if(flag) {
+			request.getSession().setAttribute("userEmail", email);
+			request.getRequestDispatcher("/admin").forward(request, response);
+		}
+		else {
+			request.setAttribute("message", "Login Failed!");
+			request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
+		}
+	}
+	
 }
