@@ -23,6 +23,7 @@
 				<th>Category</th>
 				<th>Action</th>
 			</tr>
+
 			<c:forEach var="category" items="${listCategory}" varStatus="statu">
 				<tr>
 					<td>${statu.count}</td>

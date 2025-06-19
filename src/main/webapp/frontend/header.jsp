@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,19 @@
 			</ul>
 
 			
+		</div>
+			
+		<div>
+			<br>
+			
+			
+			<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
+			  <c:forEach var="category" items="${listCategory}" varStatus="status">
+			  	
+				<li style="display: inline; margin-right: 15px; margin-left: 15px"><a href="<%= request.getContextPath()%>/view_category?id=${category.category_id}">${category.name}</a></li><c:if test="${not status.last}"> | </c:if> 
+			  </c:forEach>
+			  
+			</ul>
 		</div>
 		
 	</div>

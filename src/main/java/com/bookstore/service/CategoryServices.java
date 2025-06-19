@@ -34,10 +34,10 @@ public class CategoryServices {
 		if(message!=null) {
 			request.setAttribute("newCategoryMessage", message);
 		}
-		
-		
+		for(Category cat: listCategory) {
+			System.out.println("id=" + cat.getCategory_id() + " name=" + cat.getName());
+		}
 
-		
 		request.setAttribute("pageTitle", "Manage Category");
 		request.setAttribute("listCategory", listCategory);
 		request.getRequestDispatcher("category_list.jsp").forward(request, response);
@@ -84,5 +84,11 @@ public class CategoryServices {
 		}
 		
 		
+	}
+	
+	public void deleteCategory() throws ServletException, IOException {
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		categoryDAO.delete(categoryId);
+		listCategory("Category deleted successfully!");
 	}
 }
