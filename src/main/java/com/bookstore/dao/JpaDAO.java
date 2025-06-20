@@ -31,6 +31,7 @@ public class JpaDAO<E> {
 		entityManager.getTransaction().begin();
 		entity = entityManager.merge(entity);
 		entityManager.getTransaction().commit();
+		
 		return entity;
 	}
 	

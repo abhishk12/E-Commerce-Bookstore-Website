@@ -45,6 +45,7 @@ public class AdminLoginFilter implements Filter {
 			chain.doFilter(request, response);
 		}
 		else {
+			request.setAttribute("pageTitle", "Login");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	

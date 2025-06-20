@@ -29,7 +29,7 @@ class CategoryDAOTest extends BaseDAOTest {
 
 	@Test
 	void testCreateCategory() {
-		Category newCategory = new Category("Crime");
+		Category newCategory = new Category("Business & Economics");
 		Category addedCategory = categoryDAO.create(newCategory);
 		assertTrue((addedCategory!=null) && (addedCategory.getCategory_id()>0));
 	}

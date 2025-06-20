@@ -1,8 +1,13 @@
 package com.bookstore.entity;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,9 +22,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 
 @Entity(name = "book")
 @Table(name = "book")
+@NamedQueries({
+	@NamedQuery(name = "book.findAll", query="SELECT b FROM book b"),
+	@NamedQuery(name = "book.findByTitle", query = "SELECT b FROM book b WHERE b.title = :title"),
+	@NamedQuery(name = "book.countAll", query = "SELECT COUNT(*) FROM book b")
+})
 public class Book {
 	
 	private int book_id;
@@ -28,6 +39,7 @@ public class Book {
 	private String description;
 	private String isbn;
 	private byte[] image;
+	private String base64Image;
 	private float price;
 	private Date publish_date;
 	private Date last_update_time;
@@ -185,6 +197,32 @@ public class Book {
 		this.order_ids = order_ids;
 	}
 	
+	@Transient
+	public String getBase64Image() {
+		this.base64Image = Base64.getEncoder().encodeToString(this.image);
+		return this.base64Image;
+	}
 	
+	@Transient
+	public void setBase64Image(String base64) {
+		this.base64Image = base64;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(book_id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return book_id == other.book_id;
+	}
 	
 }
