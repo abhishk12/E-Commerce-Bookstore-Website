@@ -29,7 +29,8 @@ import jakarta.persistence.Transient;
 @NamedQueries({
 	@NamedQuery(name = "book.findAll", query="SELECT b FROM book b"),
 	@NamedQuery(name = "book.findByTitle", query = "SELECT b FROM book b WHERE b.title = :title"),
-	@NamedQuery(name = "book.countAll", query = "SELECT COUNT(*) FROM book b")
+	@NamedQuery(name = "book.countAll", query = "SELECT COUNT(*) FROM book b"),
+	@NamedQuery(name = "book.findByCategory", query = "SELECT b FROM book b JOIN category c ON b.category.category_id = c.category_id WHERE c.category_id= :categoryId")
 })
 public class Book {
 	

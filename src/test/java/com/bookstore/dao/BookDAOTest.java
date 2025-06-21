@@ -153,4 +153,15 @@ class BookDAOTest extends BaseDAOTest {
 		assertNotEquals(cnt, 2);
 	}
 	
+	@Test()
+	void testListByCategory() {
+		List<Book> listBooksByCategory = bookDAO.listByCategory(19);
+		
+		for(Book bk: listBooksByCategory) {
+			System.out.println(bk.getTitle());
+		}
+		
+		assertTrue(listBooksByCategory.size() > 0);
+	}
+	
 }

@@ -144,4 +144,19 @@ public class BookServices {
 		listBooks("Book deleted successfully!");
 		
 	}
+
+	public void listBooksByCategory() throws ServletException, IOException {
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		String categoryName = request.getParameter("name");
+		List<Book> listBooksByCategory = bookDAO.listByCategory(categoryId);
+		
+		List<Category> listCategories = categoryDAO.listAll();
+		request.setAttribute("listCategory", listCategories);
+		
+		request.setAttribute("listBooksByCategory", listBooksByCategory);
+		request.setAttribute("pageTitle", "Books in " + categoryName + " - An Online Bookstore");
+		request.setAttribute("categoryName", categoryName);
+		request.getRequestDispatcher("frontend/books_list_by_category.jsp").forward(request, response);
+		
+	}
 }

@@ -27,6 +27,7 @@ public class HomeServlet extends BaseServlet {
 		CategoryDAO categoryDAO = new CategoryDAO(entityManager);
 		List<Category> listCategories = categoryDAO.listAll();
 		request.setAttribute("listCategory", listCategories);
+		request.setAttribute("pageTitle", "The Book Nook - An Online Bookstore");
 		request.getRequestDispatcher("frontend/index.jsp").forward(request, response);
 	}
 

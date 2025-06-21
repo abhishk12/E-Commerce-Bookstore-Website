@@ -5,13 +5,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>The Book Nook - An Online Bookstore</title>
+<title>${pageTitle}</title>
 <link rel="icon" href="<%= request.getContextPath() %>/images/reading-book.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
 </head>
-<body style="font-family: 'Spicy Rice'; background-color: #dcdcdc;" align="center">
+<body align="center">
 	<div>
 		
 		<div>
@@ -39,7 +40,7 @@
 			<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
 			  <c:forEach var="category" items="${listCategory}" varStatus="status">
 			  	
-				<li style="display: inline; margin-right: 15px; margin-left: 15px"><a href="<%= request.getContextPath()%>/view_category?id=${category.category_id}">${category.name}</a></li><c:if test="${not status.last}"> | </c:if> 
+				<li style="display: inline; margin-right: 15px; margin-left: 15px"><a href="<%= request.getContextPath()%>/view_category?id=${category.category_id}&name=${category.name}">${category.name}</a></li><c:if test="${not status.last}"> | </c:if> 
 			  </c:forEach>
 			  
 			</ul>
