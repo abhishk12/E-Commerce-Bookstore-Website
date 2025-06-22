@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.List;
 
 import com.bookstore.controller.BaseServlet;
+import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.CategoryDAO;
+import com.bookstore.entity.Book;
 import com.bookstore.entity.Category;
 
 import jakarta.servlet.ServletException;
@@ -23,6 +25,9 @@ public class HomeServlet extends BaseServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BookDAO bookDAO = new BookDAO(entityManager);
+		List<Book> newBooks = bookDAO.listNewBooks();
+		request.setAttribute("listNewBooks", newBooks);
 		
 		CategoryDAO categoryDAO = new CategoryDAO(entityManager);
 		List<Category> listCategories = categoryDAO.listAll();

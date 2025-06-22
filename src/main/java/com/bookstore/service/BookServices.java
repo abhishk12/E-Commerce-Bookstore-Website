@@ -159,4 +159,35 @@ public class BookServices {
 		request.getRequestDispatcher("frontend/books_list_by_category.jsp").forward(request, response);
 		
 	}
+
+	public void viewBookDetail() throws ServletException, IOException {
+		int bookId = Integer.parseInt(request.getParameter("id"));
+		Book bookDetail = bookDAO.get(bookId);
+		List<Category> listCategories = categoryDAO.listAll();
+		request.setAttribute("listCategory", listCategories);
+		request.setAttribute("pageTitle", bookDetail.getTitle());
+		request.setAttribute("bookDetail", bookDetail);
+		request.getRequestDispatcher("frontend/book_detail.jsp").forward(request, response);
+
+	}
+
+	public void search() throws ServletException, IOException {
+		String queryString = request.getParameter("keyword");
+		List<Book> resultList = null;
+		
+		if((queryString == null) || (queryString.equals(""))) {
+			resultList = bookDAO.listAll();
+		}
+		else {
+			resultList = bookDAO.search(queryString);
+		}
+		List<Category> listCategories = categoryDAO.listAll();
+		request.setAttribute("resultList", resultList);
+		request.setAttribute("listCategory", listCategories);
+		request.setAttribute("queryString", queryString);
+		request.setAttribute("pageTitle", "Results for " + queryString);
+		
+		request.getRequestDispatcher("frontend/search_result.jsp").forward(request, response);
+		
+	}
 }

@@ -20,16 +20,19 @@
 		</div>
 		
 		<div>
-			<input type="text" name="keyword" size="50" placeholder="Search by book name / category / author / keyword" />
-			<input type="button" value="Search"/>
+			<form action="search" method="get" autocomplete="off" >
+				<input type="text" name="keyword" size="50" placeholder="Search by book title or author name" />
+				<input type="submit" value="Search" />
 			
-			<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
-			  
-			  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="">Sign In</a> |</li>
-			  <li style="display: inline; margin-right: 5px"><a href="">Register</a>  |</li>
-			  <li style="display: inline; margin-right: 10px"><a href="">Cart</a> </li>
-			</ul>
-
+			
+			
+				<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
+				  
+				  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="">Sign In</a> |</li>
+				  <li style="display: inline; margin-right: 5px"><a href="">Register</a>  |</li>
+				  <li style="display: inline; margin-right: 10px"><a href="">Cart</a> </li>
+				</ul>
+			</form>
 			
 		</div>
 			

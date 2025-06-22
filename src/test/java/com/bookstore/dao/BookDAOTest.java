@@ -164,4 +164,41 @@ class BookDAOTest extends BaseDAOTest {
 		assertTrue(listBooksByCategory.size() > 0);
 	}
 	
+	@Test()
+	void testListNewBooks() {
+		List<Book> listBooksByCategory = bookDAO.listNewBooks();
+		
+		for(Book bk: listBooksByCategory) {
+			System.out.println(bk.getTitle() + " Date: " + bk.getPublish_date());
+		}
+		
+		assertTrue(listBooksByCategory.size() > 0);
+	}
+	
+	@Test()
+	void testFindWithQueryString() {
+		List<Book> listBooks = bookDAO.search("of");
+		
+		for(Book bk: listBooks) {
+			System.out.println(bk.getTitle());
+		}
+		
+		assertEquals(listBooks.size(), 2);
+		
+		
+	}
+	
+	@Test()
+	void testFindWithQueryStringInAuthor() {
+		List<Book> listBooks = bookDAO.search("king");
+		
+		for(Book bk: listBooks) {
+			System.out.println(bk.getTitle());
+		}
+		
+		assertEquals(listBooks.size(), 1);
+		
+		
+	}
+	
 }
