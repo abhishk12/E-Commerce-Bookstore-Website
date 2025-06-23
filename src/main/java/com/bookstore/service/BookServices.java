@@ -50,8 +50,8 @@ public class BookServices {
 	}
 	
 	public void showBookCreationForm() throws ServletException, IOException {
-		List<Category> listCategories = categoryDAO.listAll();
-		request.setAttribute("listCategory", listCategories);
+//		List<Category> listCategories = categoryDAO.listAll();
+//		request.setAttribute("listCategory", listCategories);
 		request.getRequestDispatcher("book_form.jsp").forward(request, response);
 	}
 	
@@ -75,9 +75,9 @@ public class BookServices {
 	public void editBook() throws ServletException, IOException {
 		int bookId = Integer.parseInt(request.getParameter("id"));
 		Book bk = bookDAO.get(bookId);
-		List<Category> listCategories = categoryDAO.listAll();
-		
-		request.setAttribute("listCategory", listCategories);
+//		List<Category> listCategories = categoryDAO.listAll();
+//		
+//		request.setAttribute("listCategory", listCategories);
 		request.setAttribute("bookObj", bk);
 		request.getRequestDispatcher("book_form.jsp").forward(request, response);
 	}
@@ -149,8 +149,8 @@ public class BookServices {
 		String categoryName = request.getParameter("name");
 		List<Book> listBooksByCategory = bookDAO.listByCategory(categoryId);
 		
-		List<Category> listCategories = categoryDAO.listAll();
-		request.setAttribute("listCategory", listCategories);
+//		List<Category> listCategories = categoryDAO.listAll();
+//		request.setAttribute("listCategory", listCategories);
 		
 		request.setAttribute("listBooksByCategory", listBooksByCategory);
 		request.setAttribute("pageTitle", "Books in " + categoryName + " - An Online Bookstore");
@@ -162,8 +162,8 @@ public class BookServices {
 	public void viewBookDetail() throws ServletException, IOException {
 		int bookId = Integer.parseInt(request.getParameter("id"));
 		Book bookDetail = bookDAO.get(bookId);
-		List<Category> listCategories = categoryDAO.listAll();
-		request.setAttribute("listCategory", listCategories);
+//		List<Category> listCategories = categoryDAO.listAll();
+//		request.setAttribute("listCategory", listCategories);
 		request.setAttribute("pageTitle", bookDetail.getTitle());
 		request.setAttribute("bookDetail", bookDetail);
 		request.getRequestDispatcher("frontend/book_detail.jsp").forward(request, response);
@@ -180,9 +180,9 @@ public class BookServices {
 		else {
 			resultList = bookDAO.search(queryString);
 		}
-		List<Category> listCategories = categoryDAO.listAll();
+//		List<Category> listCategories = categoryDAO.listAll();
 		request.setAttribute("resultList", resultList);
-		request.setAttribute("listCategory", listCategories);
+//		request.setAttribute("listCategory", listCategories);
 		request.setAttribute("queryString", queryString);
 		request.setAttribute("pageTitle", "Results for " + queryString);
 		

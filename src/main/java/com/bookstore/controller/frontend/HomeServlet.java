@@ -28,9 +28,9 @@ public class HomeServlet extends HttpServlet {
 		List<Book> newBooks = bookDAO.listNewBooks();
 		request.setAttribute("listNewBooks", newBooks);
 		
-		CategoryDAO categoryDAO = new CategoryDAO();
-		List<Category> listCategories = categoryDAO.listAll();
-		request.setAttribute("listCategory", listCategories);
+//		CategoryDAO categoryDAO = new CategoryDAO();
+//		List<Category> listCategories = categoryDAO.listAll();
+//		request.setAttribute("listCategory", listCategories);
 		request.setAttribute("pageTitle", "The Book Nook - An Online Bookstore");
 		request.getRequestDispatcher("frontend/index.jsp").forward(request, response);
 	}
