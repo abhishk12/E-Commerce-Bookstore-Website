@@ -1,16 +1,17 @@
 package com.bookstore.controller.frontend;
 
-import com.bookstore.controller.BaseServlet;
+
 import com.bookstore.service.BookServices;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/search")
-public class SearchBookServlet extends BaseServlet {
+public class SearchBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public SearchBookServlet() {
@@ -18,7 +19,7 @@ public class SearchBookServlet extends BaseServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BookServices bookServices = new BookServices(entityManager, request, response);
+		BookServices bookServices = new BookServices(request, response);
 		bookServices.search();
 	}
 

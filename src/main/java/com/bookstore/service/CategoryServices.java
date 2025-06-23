@@ -16,13 +16,13 @@ public class CategoryServices {
 	private CategoryDAO categoryDAO;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-	private EntityManager entityManager;
+
 	
-	public CategoryServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public CategoryServices(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		this.entityManager = entityManager;
-		categoryDAO = new CategoryDAO(entityManager);
+
+		categoryDAO = new CategoryDAO();
 	}
 	
 	public void listCategory() throws ServletException, IOException {

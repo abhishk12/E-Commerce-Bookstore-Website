@@ -29,7 +29,7 @@ class UserDAOTest {
 //		
 //		entityManager.getTransaction().commit();
 		
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		user = userDAO.create(user);
 		
 		entityManager.close();
@@ -50,7 +50,7 @@ class UserDAOTest {
 		user.setFull_name("ABC");
 		user.setPassword("123");
 		
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		user = userDAO.update(user);
 		
 		entityManager.close();
@@ -66,7 +66,7 @@ class UserDAOTest {
 	public void testGetUsers() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		Users user = userDAO.get(22);
 		System.out.println(user.getEmail());
 		entityManager.close();
@@ -78,7 +78,7 @@ class UserDAOTest {
 	public void testDeleteUsers() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		userDAO.delete(19);
 		Users user = userDAO.get(19);
 		entityManager.close();
@@ -90,7 +90,7 @@ class UserDAOTest {
 	public void testListAllUsers() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		List<Users> userList = userDAO.listAll(); 
 		for(Users user:userList) {
 			System.out.println(user.getEmail());
@@ -105,7 +105,7 @@ class UserDAOTest {
 	public void testCountAllUsers() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		long cnt = userDAO.count(); 
 		System.out.println(cnt);
 		entityManager.close();
@@ -117,7 +117,7 @@ class UserDAOTest {
 	public void testFindByEmail() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		Users user = userDAO.findByEmail("abc@gmail.com"); 
 		System.out.println(user.getUser_id());
 		entityManager.close();
@@ -129,7 +129,7 @@ class UserDAOTest {
 	public void testCheckLogin() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		boolean flag = userDAO.checkLogin("abc@gmail.com", "123"); 
 
 		entityManager.close();
@@ -141,7 +141,7 @@ class UserDAOTest {
 	public void testCheckLoginFailed() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		UserDAO userDAO = new UserDAO(entityManager);
+		UserDAO userDAO = new UserDAO();
 		boolean flag = userDAO.checkLogin("abc@gmail.com", "122"); 
 
 		entityManager.close();

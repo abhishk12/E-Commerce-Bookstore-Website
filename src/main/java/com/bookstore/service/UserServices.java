@@ -15,14 +15,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class UserServices {
 	private UserDAO userDAO;
-	private EntityManager entityManager;
+
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
 	
-	public UserServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
-		this.entityManager = entityManager;
-		userDAO = new UserDAO(entityManager);
+	public UserServices(HttpServletRequest request, HttpServletResponse response) {
+		userDAO = new UserDAO();
 		this.request = request;
 		this.response = response;
 	}

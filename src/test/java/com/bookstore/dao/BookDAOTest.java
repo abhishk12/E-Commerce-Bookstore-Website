@@ -22,18 +22,17 @@ import com.bookstore.entity.Category;
 
 import jakarta.persistence.EntityNotFoundException;
 
-class BookDAOTest extends BaseDAOTest {
+class BookDAOTest {
 	private static BookDAO bookDAO;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		BaseDAOTest.setUpBeforeClass();
-		bookDAO = new BookDAO(entityManager);
+		bookDAO = new BookDAO();
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		BaseDAOTest.tearDownAfterClass();
+		bookDAO.close();
 	}
 
 	@Test

@@ -6,78 +6,170 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
 public class JpaDAO<E> {
-	protected EntityManager entityManager;
+	private static EntityManagerFactory entityManagerFactory;
+	
+	static {
+		entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
+		
+	}
 
-	public JpaDAO(EntityManager entityManager) {
+	public JpaDAO() {
 		super();
-		this.entityManager = entityManager;
+
 	}
 	
 	public E create(E entity) {
-		entityManager.getTransaction().begin();		
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			
+			entityManager.getTransaction().begin();		
+			
+			entityManager.persist(entity);
+			entityManager.flush();
+			entityManager.refresh(entity);
+			
+			entityManager.getTransaction().commit();
+			
+			return entity;
+		}
+		finally {
+			entityManager.close();
+		}
 		
-		entityManager.persist(entity);
-		entityManager.flush();
-		entityManager.refresh(entity);
-		
-		entityManager.getTransaction().commit();
-		return entity;
 	}
 	
 	public E update(E entity) {
-		entityManager.getTransaction().begin();
-		entity = entityManager.merge(entity);
-		entityManager.getTransaction().commit();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			entityManager.getTransaction().begin();
+			entity = entityManager.merge(entity);
+			entityManager.getTransaction().commit();
+			
+			return entity;
+		}
+		finally {
+			entityManager.close();
+		}
 		
-		return entity;
 	}
 	
 	public E find(Class<E> type, Object id) {
-		E entity  = entityManager.find(type, id);
-		if(entity != null) {
-			entityManager.refresh(entity);
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			E entity  = entityManager.find(type, id);
+			if(entity != null) {
+				entityManager.refresh(entity);
+			}
+			
+			return entity;
 		}
-		return entity;
+		finally {
+			entityManager.close();
+		}
+		
 	}
 	
 	public void delete(Class<E> type, Object id) {
-		entityManager.getTransaction().begin();
-		Object reference = entityManager.getReference(type, id);
-		entityManager.remove(reference);
-		entityManager.getTransaction().commit();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			entityManager.getTransaction().begin();
+			Object reference = entityManager.getReference(type, id);
+			entityManager.remove(reference);
+			entityManager.getTransaction().commit();
+			
+		}
+		finally {
+			entityManager.close();
+		}
+		
 	}
 	
 	public List<E> findWithNamedQuery(String queryName){
-		entityManager.clear(); 
-		Query query = entityManager.createNamedQuery(queryName);
-		return query.getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			entityManager.clear(); 
+			Query query = entityManager.createNamedQuery(queryName);
+			
+			return query.getResultList();
+		}
+		finally {
+			entityManager.close();
+		}
+		
 	}
 	
 	public long countWithNamedQuery(String queryName) {
-		Query query = entityManager.createNamedQuery(queryName);
-		return (long) query.getSingleResult();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+			
+			return (long) query.getSingleResult();
+		}
+		finally {
+			entityManager.close();
+		}
+		
 	}
 	
 	public List<E> findWithNamedQuery(String queryName, String paramName, Object paramValue) {
-		Query query = entityManager.createNamedQuery(queryName);
-		query.setParameter(paramName, paramValue);
-		return query.getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+			query.setParameter(paramName, paramValue);
+			
+			return query.getResultList();
+		}
+		finally {
+			entityManager.close();
+		}
+		
 	}
 	
 	public List<E> findWithNamedQuery(String queryName, Map<String, Object> queryParameters) {
-		Query query = entityManager.createNamedQuery(queryName);
-		Set<Entry<String, Object>> rawParameters = queryParameters.entrySet();
-		
-		for(Entry<String, Object> param: rawParameters) {
-			query.setParameter(param.getKey(), param.getValue());
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+			Set<Entry<String, Object>> rawParameters = queryParameters.entrySet();
+			
+			for(Entry<String, Object> param: rawParameters) {
+				query.setParameter(param.getKey(), param.getValue());
+			}
+			return query.getResultList();
+		}
+		finally {
+			entityManager.close();
 		}
 		
 		
-		return query.getResultList();
+		
 	}
 	
+	public List<E> findWithNamedQuery(String queryName, int firstResult, int maxResults) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+			query.setFirstResult(firstResult);
+			query.setMaxResults(maxResults);
+			List<E> results = query.getResultList();
+			
+			return results;
+		}
+		finally {
+			entityManager.close();
+		}
+		
+	}
+	
+	public void close() {
+		if(entityManagerFactory != null) {
+			entityManagerFactory.close();
+		}
+		
+	}
 	
 }

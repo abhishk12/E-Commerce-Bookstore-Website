@@ -7,11 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.bookstore.controller.BaseServlet;
 import com.bookstore.service.UserServices;
 
 @WebServlet("/admin/login")
-public class AdminLoginServlet extends BaseServlet {
+public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public AdminLoginServlet() {
@@ -24,7 +23,7 @@ public class AdminLoginServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		UserServices userServices = new UserServices(entityManager, request, response);
+		UserServices userServices = new UserServices(request, response);
 		userServices.login();
 		
 	}

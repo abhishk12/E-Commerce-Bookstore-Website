@@ -22,16 +22,15 @@ import jakarta.servlet.http.Part;
 public class BookServices {
 	private BookDAO bookDAO;
 	private CategoryDAO categoryDAO;
-	private EntityManager entityManager;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
-	public BookServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
+	public BookServices(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		this.entityManager = entityManager;
-		bookDAO = new BookDAO(entityManager);
-		categoryDAO = new CategoryDAO(entityManager);
+
+		bookDAO = new BookDAO();
+		categoryDAO = new CategoryDAO();
 	}
 	
 	public void listBooks() throws ServletException, IOException {

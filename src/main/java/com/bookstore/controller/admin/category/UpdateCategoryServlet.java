@@ -7,11 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.bookstore.controller.BaseServlet;
 import com.bookstore.service.CategoryServices;
 
 @WebServlet("/admin/update_category")
-public class UpdateCategoryServlet extends BaseServlet {
+public class UpdateCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public UpdateCategoryServlet() {
@@ -19,7 +18,7 @@ public class UpdateCategoryServlet extends BaseServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CategoryServices categoryServices = new CategoryServices(entityManager, request, response);
+		CategoryServices categoryServices = new CategoryServices(request, response);
 		categoryServices.updateCategory();
 	}
 
