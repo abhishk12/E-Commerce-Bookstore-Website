@@ -3,6 +3,7 @@
 <jsp:include page="header.jsp"></jsp:include>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="<%= request.getContextPath() %>/js/jquery.richtext.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/base/jquery-ui.min.css" integrity="sha512-TFee0335YRJoyiqz8hA8KV3P0tXa5CpRBSoM0Wnkn7JoJx1kaq1yXL/rb8YFpWXkMOjRcv5txv+C6UluttluCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<br><br>
 	
@@ -19,7 +20,7 @@
 	<div align="center">
 	
 		<c:if test="${bookObj != null}">
-			<form action="update_book" method="post" onsubmit="return validateFormInput()" enctype="multipart/form-data" >
+			<form action="update_book" method="post" onsubmit="return validateFormInput()" enctype="multipart/form-data" style="width:80%;">
 			<input type="hidden" name="book_id" value="${bookObj.book_id}" />
 		</c:if>
 		<c:if test="${bookObj == null}">
@@ -151,6 +152,7 @@
 		$("#book_cover").change(function (){
 	    	showPreviewThumbnail(this);
 	    });
+		$('#book_description').richText();
 	})
 
 	function validateFormInput(){

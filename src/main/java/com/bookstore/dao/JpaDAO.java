@@ -116,6 +116,19 @@ public class JpaDAO<E> {
 		
 	}
 	
+	public long countWithNamedQuery(String queryName, String paramName, Object categoryId) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+			query.setParameter(paramName, categoryId);
+			return (long) query.getSingleResult();
+		}
+		finally {
+			entityManager.close();
+		}
+		
+	}
+	
 	public List<E> findWithNamedQuery(String queryName, String paramName, Object paramValue) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		try {

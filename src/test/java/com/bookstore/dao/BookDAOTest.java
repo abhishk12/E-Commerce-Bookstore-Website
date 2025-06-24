@@ -193,11 +193,15 @@ class BookDAOTest {
 		
 		for(Book bk: listBooks) {
 			System.out.println(bk.getTitle());
-		}
+		}	
+		assertEquals(listBooks.size(), 1);	
+	}
+	
+	@Test()
+	void testCountByCategory() {
+		long cnt = bookDAO.countByCategory(19);
 		
-		assertEquals(listBooks.size(), 1);
-		
-		
+		assertTrue(cnt>0);	
 	}
 	
 }

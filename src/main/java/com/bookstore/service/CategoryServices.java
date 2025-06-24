@@ -3,6 +3,7 @@ package com.bookstore.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.CategoryDAO;
 import com.bookstore.entity.Category;
 
@@ -88,7 +89,17 @@ public class CategoryServices {
 	
 	public void deleteCategory() throws ServletException, IOException {
 		int categoryId = Integer.parseInt(request.getParameter("id"));
-		categoryDAO.delete(categoryId);
-		listCategory("Category deleted successfully!");
+		BookDAO bookDAO = new BookDAO();
+		long noOfBooks = bookDAO.countByCategory(categoryId);
+		
+		if(noOfBooks>0) {
+			listCategory("Could not delete the category as it contains some books associcated with it.");
+			
+		}
+		else {
+			categoryDAO.delete(categoryId);
+			listCategory("Category deleted successfully!");
+		}
+		
 	}
 }

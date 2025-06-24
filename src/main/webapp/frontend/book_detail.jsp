@@ -15,7 +15,7 @@
 				</tr>
 				
 				<tr>
-					<td style="text-align: justify;"> ${bookDetail.description} </td>
+					<td style="text-align: justify; font-family: 'Roboto', sans-serif; font-weight: 200;"> ${bookDetail.description} </td>
 				</tr>
 				
 				<tr> 

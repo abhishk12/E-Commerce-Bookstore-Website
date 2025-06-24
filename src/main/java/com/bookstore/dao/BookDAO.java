@@ -11,6 +11,7 @@ import jakarta.persistence.Query;
 public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 
 	public BookDAO() {
+
 	}
 
 	@Override
@@ -67,5 +68,9 @@ public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 	
 	public List<Book> search(String queryString){
 		return super.findWithNamedQuery("book.findWithQueryString", "queryString", queryString);
+	}
+	
+	public long countByCategory(int categoryId) {
+		return super.countWithNamedQuery("book.countByCategory", "categoryID", categoryId);
 	}
 }

@@ -16,7 +16,10 @@
 	<div>
 		
 		<div>
-			<img alt="logo here" src="<%= request.getContextPath() %>/images/bookStoreSVGLogo.svg" width="700" height="150"/>
+			<a href="${pageContext.request.contextPath}/home">
+				<img alt="logo here" src="<%= request.getContextPath() %>/images/bookStoreSVGLogo.svg" width="700" height="150"/>
+			</a>
+			
 		</div>
 		
 		<div>
