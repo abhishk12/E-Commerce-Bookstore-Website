@@ -13,7 +13,7 @@
 			Edit Customer
 		</c:if>
 		
-		<c:if test="${bookObj == null }">
+		<c:if test="${custObj == null }">
 			Create New Customer
 		</c:if>
 		

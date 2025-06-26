@@ -50,7 +50,7 @@
 <script type="text/javascript">
 	function confirmDelete(customerId){
 		if (confirm("Are you sure you want to delete customer with Id: " + customerId + " ?")){
-			window.location = "delete_customer?id=" + bookId;
+			window.location = "delete_customer?id=" + customerId;
 		}
 	}	
 </script>	

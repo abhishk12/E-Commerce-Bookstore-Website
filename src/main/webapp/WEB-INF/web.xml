@@ -3,25 +3,26 @@
 	<servlet>
 		<description>
 		</description>
-		<display-name>ListCustomerServlet</display-name>
-		<servlet-name>ListCustomerServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.admin.customer.ListCustomerServlet</servlet-class>
+		<display-name>UpdateCustomerServlet</display-name>
+		<servlet-name>UpdateCustomerServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.admin.customer.UpdateCustomerServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
 		</description>
-		<display-name>CreateCustomerServlet</display-name>
-		<servlet-name>CreateCustomerServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.admin.customer.CreateCustomerServlet</servlet-class>
+		<display-name>DeleteCustomerServlet</display-name>
+		<servlet-name>DeleteCustomerServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.admin.customer.DeleteCustomerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ListCustomerServlet</servlet-name>
-		<url-pattern>/ListCustomerServlet</url-pattern>
+		<servlet-name>UpdateCustomerServlet</servlet-name>
+		<url-pattern>/UpdateCustomerServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>CreateCustomerServlet</servlet-name>
-		<url-pattern>/CreateCustomerServlet</url-pattern>
+		<servlet-name>DeleteCustomerServlet</servlet-name>
+		<url-pattern>/DeleteCustomerServlet</url-pattern>
 	</servlet-mapping>
+
   <error-page>
     <error-code>404</error-code>
     <location>/error/404.jsp</location>
