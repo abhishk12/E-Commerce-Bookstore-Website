@@ -19,7 +19,7 @@
 		
 		<div>
 			<a href="${pageContext.request.contextPath}/admin/">
-				<img alt="logo here" src="<%= request.getContextPath() %>/images/bookStoreSVGLogo.svg" width="700" height="150"/>
+				<img alt="logo here" src="<%= request.getContextPath()%>/images/bookStoreSVGLogo.svg" width="700" height="150"/>
 			</a>
 			
 		</div>

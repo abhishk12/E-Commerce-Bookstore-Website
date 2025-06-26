@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +21,11 @@ import jakarta.persistence.TemporalType;
 
 @Entity(name="customer")
 @Table(name="customer")
+@NamedQueries({
+	@NamedQuery(name = "customer.findAll", query = "SELECT c FROM customer c ORDER BY c.register_date DESC"),
+	@NamedQuery(name = "customer.countAll", query = "SELECT COUNT(*) FROM customer c"),
+	@NamedQuery(name = "customer.findByEmail", query = "SELECT c FROM customer c WHERE c.email= :email")
+})
 public class Customer implements Serializable {
 	
 	private int customer_id;
