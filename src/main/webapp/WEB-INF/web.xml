@@ -14,6 +14,20 @@
 		<servlet-name>DeleteCustomerServlet</servlet-name>
 		<servlet-class>com.bookstore.controller.admin.customer.DeleteCustomerServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ShowRegisterCustomerFormServlet</display-name>
+		<servlet-name>ShowRegisterCustomerFormServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.frontend.customer.ShowRegisterCustomerFormServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>RegisterCustomerServlet</display-name>
+		<servlet-name>RegisterCustomerServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.frontend.customer.RegisterCustomerServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>UpdateCustomerServlet</servlet-name>
 		<url-pattern>/UpdateCustomerServlet</url-pattern>
@@ -21,6 +35,14 @@
 	<servlet-mapping>
 		<servlet-name>DeleteCustomerServlet</servlet-name>
 		<url-pattern>/DeleteCustomerServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ShowRegisterCustomerFormServlet</servlet-name>
+		<url-pattern>/ShowRegisterCustomerFormServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegisterCustomerServlet</servlet-name>
+		<url-pattern>/RegisterCustomerServlet</url-pattern>
 	</servlet-mapping>
 
   <error-page>

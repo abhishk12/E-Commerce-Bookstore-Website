@@ -115,4 +115,37 @@ public class CustomerServices {
 		listCustomers("Customer deleted successfully");
 		
 	}
+	
+	public void registerCustomer() throws ServletException, IOException {
+		String email = request.getParameter("customer_email");
+		Customer existCustomer = customerDAO.findByEmail(email);
+		String message = "";
+		if(existCustomer!=null) {
+			message = "Could not register. Email already exist!";
+		}
+		else {
+			String customer_full_name = request.getParameter("customer_full_name");
+			String customer_password = request.getParameter("customer_password");
+			String customer_address = request.getParameter("customer_address");
+			String customer_zipcode = request.getParameter("customer_zipcode");
+			String customer_city = request.getParameter("customer_city");
+			String customer_country = request.getParameter("customer_country");
+			String customer_phone = request.getParameter("customer_phone");
+			Customer newCustomer = new Customer();
+			newCustomer.setEmail(email);
+			newCustomer.setFull_name(customer_full_name);
+			newCustomer.setPassword(customer_password);
+			newCustomer.setAddress(customer_address);
+			newCustomer.setZip_code(customer_zipcode);
+			newCustomer.setCity(customer_city);
+			newCustomer.setCountry(customer_country);
+			newCustomer.setPhone(customer_phone);
+			
+			customerDAO.create(newCustomer);
+			message = "You have registered successfully! Thank you.";
+			
+		}
+		request.setAttribute("message", message);
+		request.getRequestDispatcher("frontend/message.jsp").forward(request, response);
+	}
 }

@@ -32,7 +32,7 @@
 				<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
 				  
 				  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="">Sign In</a> |</li>
-				  <li style="display: inline; margin-right: 5px"><a href="">Register</a>  |</li>
+				  <li style="display: inline; margin-right: 5px"><a href="register">Register</a>  |</li>
 				  <li style="display: inline; margin-right: 10px"><a href="">Cart</a> </li>
 				</ul>
 			</form>
