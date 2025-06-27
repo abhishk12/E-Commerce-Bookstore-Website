@@ -31,9 +31,18 @@
 			
 				<ul style="list-style-type: none; padding: 0; margin: 0; display: inline;">
 				  
-				  <li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="">Sign In</a> |</li>
+				  <c:if test="${loggedCustomer == null}">
+				  	<li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="login">Sign In</a> |</li>
 				  <li style="display: inline; margin-right: 5px"><a href="register">Register</a>  |</li>
-				  <li style="display: inline; margin-right: 10px"><a href="">Cart</a> </li>
+				  </c:if>
+				  <c:if test="${loggedCustomer != null}">
+				  	<li style="display: inline; margin-right: 5px; margin-left: 10px"><a href="view_profile">Welcome, ${loggedCustomer.full_name }</a> |</li>
+				  	<li style="display: inline; margin-right: 5px"><a href="view_orders">My Orders</a>  |</li>
+				  	<li style="display: inline; margin-right: 5px"><a href="logout">Logout</a>  |</li>
+				  </c:if>
+				  
+				  
+				  <li style="display: inline; margin-right: 10px"><a href="view_cart">Cart</a> </li>
 				</ul>
 			</form>
 			

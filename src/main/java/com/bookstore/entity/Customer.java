@@ -24,7 +24,8 @@ import jakarta.persistence.TemporalType;
 @NamedQueries({
 	@NamedQuery(name = "customer.findAll", query = "SELECT c FROM customer c ORDER BY c.register_date DESC"),
 	@NamedQuery(name = "customer.countAll", query = "SELECT COUNT(*) FROM customer c"),
-	@NamedQuery(name = "customer.findByEmail", query = "SELECT c FROM customer c WHERE c.email= :email")
+	@NamedQuery(name = "customer.findByEmail", query = "SELECT c FROM customer c WHERE c.email= :email"),
+	@NamedQuery(name = "customer.checkLogin", query = "SELECT c FROM customer c WHERE c.email = :email AND c.password = :password")
 })
 public class Customer implements Serializable {
 	

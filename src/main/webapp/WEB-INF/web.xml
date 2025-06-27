@@ -3,47 +3,15 @@
 	<servlet>
 		<description>
 		</description>
-		<display-name>UpdateCustomerServlet</display-name>
-		<servlet-name>UpdateCustomerServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.admin.customer.UpdateCustomerServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>DeleteCustomerServlet</display-name>
-		<servlet-name>DeleteCustomerServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.admin.customer.DeleteCustomerServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>ShowRegisterCustomerFormServlet</display-name>
-		<servlet-name>ShowRegisterCustomerFormServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.frontend.customer.ShowRegisterCustomerFormServlet</servlet-class>
-	</servlet>
-	<servlet>
-		<description>
-		</description>
-		<display-name>RegisterCustomerServlet</display-name>
-		<servlet-name>RegisterCustomerServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.frontend.customer.RegisterCustomerServlet</servlet-class>
+		<display-name>UpdateCustomerProfileServlet</display-name>
+		<servlet-name>UpdateCustomerProfileServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.frontend.customer.UpdateCustomerProfileServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>UpdateCustomerServlet</servlet-name>
-		<url-pattern>/UpdateCustomerServlet</url-pattern>
+		<servlet-name>UpdateCustomerProfileServlet</servlet-name>
+		<url-pattern>/UpdateCustomerProfileServlet</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>DeleteCustomerServlet</servlet-name>
-		<url-pattern>/DeleteCustomerServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ShowRegisterCustomerFormServlet</servlet-name>
-		<url-pattern>/ShowRegisterCustomerFormServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>RegisterCustomerServlet</servlet-name>
-		<url-pattern>/RegisterCustomerServlet</url-pattern>
-	</servlet-mapping>
+
 
   <error-page>
     <error-code>404</error-code>

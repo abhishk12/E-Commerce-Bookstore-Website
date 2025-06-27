@@ -87,5 +87,17 @@ class CustomerDAOTest {
 		Customer cust = customerDAO.findByEmail("cat@gmai.com");
 		assertNotNull(cust);
 	}
+	
+	@Test
+	void testCheckLoginSuccess() {
+		Customer cust = customerDAO.checkLogin("cat@gmail.com", "789");
+		assertNotNull(cust);
+	}
+	
+	@Test
+	void testCheckLoginFailure() {
+		Customer cust = customerDAO.checkLogin("cat@gmail.com", "788");
+		assertNull(cust);
+	}
 
 }
