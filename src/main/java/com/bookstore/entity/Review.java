@@ -3,6 +3,9 @@ package com.bookstore.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,6 +20,10 @@ import jakarta.persistence.TemporalType;
 
 @Entity(name="review")
 @Table(name="review")
+@NamedQueries({
+	@NamedQuery(name = "review.listAll", query = "SELECT r FROM review r ORDER BY review_time DESC"),
+	@NamedQuery(name = "review.countAll", query = "SELECT COUNT(*) FROM review r")
+})
 public class Review implements Serializable {
 	
 	private int review_id;
