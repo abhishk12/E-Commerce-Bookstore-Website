@@ -19,7 +19,7 @@ import jakarta.servlet.ServletResponse;
 public class CustomerLoginFilter extends HttpFilter {
 	
 	private static final String[] loginRequiredURLs = {"/view_profile", "/edit_profile",
-			"/update_profile"};
+			"/update_profile", "/write_review"};
        
     public CustomerLoginFilter() {
         super();
@@ -43,6 +43,12 @@ public class CustomerLoginFilter extends HttpFilter {
 		System.out.println(requestURL);
 		
 		if(!loggedIn && isLoginRequired(requestURL)) {
+			String queryString = httpRequest.getQueryString();
+			String redirectURL = requestURL;
+			if(queryString!=null) {
+				redirectURL = redirectURL.concat("?").concat(queryString);
+			}
+			session.setAttribute("redirectURL", redirectURL);
 			request.getRequestDispatcher("frontend/login.jsp").forward(httpRequest, response);
 		}
 		else {

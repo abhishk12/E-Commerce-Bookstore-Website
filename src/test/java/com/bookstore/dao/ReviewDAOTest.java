@@ -87,5 +87,18 @@ class ReviewDAOTest {
 		long cnt = reviewDAO.count();
 		assertEquals(cnt, 2);
 	}
+	
+	@Test
+	void testFindByCustomerAndBookNotFound() {
+		Review review = reviewDAO.findByCustomerAndBook(0, 0);
+		assertNull(review);
+	}
+	
+	@Test
+	void testFindByCustomerAndBookSuccess() {
+		Review review = reviewDAO.findByCustomerAndBook(21, 34);
+		System.out.println(review.getHeadline());
+		assertNotNull(review);
+	}
 
 }

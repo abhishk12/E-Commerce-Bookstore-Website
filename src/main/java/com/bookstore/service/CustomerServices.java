@@ -12,6 +12,7 @@ import com.bookstore.entity.Customer;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class CustomerServices {
 	private CustomerDAO customerDAO;
@@ -155,9 +156,22 @@ public class CustomerServices {
 			showLogin("Login Failed! Please check your email and password.");
 		}
 		else {
-			request.getSession().setAttribute("loggedCustomer", customer);
-			request.setAttribute("message", "Logged in successfully!");
-			showCustomerProfile();
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("loggedCustomer", customer);
+			Object objRedirectURL = session.getAttribute("redirectURL");
+			String redirectURL = "";
+			if(objRedirectURL!=null) {
+				redirectURL = (String) objRedirectURL;
+				session.removeAttribute("redirectURL");
+				response.sendRedirect(redirectURL);
+			}
+			else {
+				
+				request.setAttribute("message", "Logged in successfully!");
+				showCustomerProfile();
+			}
+			
 		}
 		
 	}

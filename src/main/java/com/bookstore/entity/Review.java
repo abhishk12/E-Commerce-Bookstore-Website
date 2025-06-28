@@ -23,8 +23,10 @@ import jakarta.persistence.Transient;
 @Table(name="review")
 @NamedQueries({
 	@NamedQuery(name = "review.listAll", query = "SELECT r FROM review r ORDER BY review_time DESC"),
-	@NamedQuery(name = "review.countAll", query = "SELECT COUNT(*) FROM review r")
-})
+	@NamedQuery(name = "review.countAll", query = "SELECT COUNT(*) FROM review r"),
+	@NamedQuery(name = "review.findByCustomerAndBook", query = "SELECT r FROM review r WHERE r.customer.customer_id = :customerId AND"
+			+ " r.book.book_id = :bookId")
+	})
 public class Review implements Serializable {
 	
 	private int review_id;

@@ -3,12 +3,16 @@ package com.bookstore.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.ReviewDAO;
+import com.bookstore.entity.Book;
+import com.bookstore.entity.Customer;
 import com.bookstore.entity.Review;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ReviewServices {
 	private ReviewDAO reviewDAO;
@@ -63,6 +67,57 @@ public class ReviewServices {
 		reviewDAO.delete(reviewId);
 		listAllReviews("Review deleted successfully!");
 		
+	}
+
+	public void showReviewForm() throws ServletException, IOException {
+		int bookId = Integer.parseInt(request.getParameter("book_id"));
+		BookDAO bookDAO = new BookDAO();
+		Book book = bookDAO.get(bookId);
+		HttpSession session = request.getSession();
+		session.setAttribute("bookDetail", book);
+//		request.setAttribute("bookDetail", book);
+		
+		Customer customer = (Customer) request.getSession().getAttribute("loggedCustomer");
+		Review existingReview = reviewDAO.findByCustomerAndBook(customer.getCustomer_id(), bookId);
+		if(existingReview!=null) {
+			request.setAttribute("message", "Your review is already posted.");
+			request.setAttribute("pageTitle", "Review posted");
+			request.setAttribute("reviewObj", existingReview);
+			request.getRequestDispatcher("frontend/review_info.jsp").forward(request, response);
+				
+		}
+		else {
+			request.setAttribute("pageTitle", "Write a review");
+			request.getRequestDispatcher("frontend/review_form.jsp").forward(request, response);
+			
+		}
+		
+		
+	}
+
+	public void submitReview() throws ServletException, IOException {
+		int bookId = Integer.parseInt(request.getParameter("book_id"));
+		int rating = Integer.parseInt(request.getParameter("rating"));
+		String headline = request.getParameter("review_headline");
+		String comment = request.getParameter("review_comment");
+		
+		Review newReview = new Review();
+		newReview.setHeadline(headline);
+		newReview.setComment(comment);
+		newReview.setRating(rating);
+		
+		Book book = new Book();
+		book.setBook_id(bookId);
+		newReview.setBook(book);
+		
+		Customer customer = (Customer) request.getSession().getAttribute("loggedCustomer");
+		newReview.setCustomer(customer);
+		
+		reviewDAO.create(newReview);
+		request.setAttribute("message", "Your review is posted. Thank You!");
+		request.setAttribute("pageTitle", "Review posted");
+		request.getRequestDispatcher("frontend/review_done.jsp").forward(request, response);
+				
 	}
 	
 	
