@@ -31,14 +31,15 @@ class ReviewDAOTest {
 		Review review = new Review();
 		Book book = new Book();
 		Customer customer = new Customer();
-		book.setBook_id(33);
-		customer.setCustomer_id(12);
+		book.setBook_id(38);
+		customer.setCustomer_id(15);
 		
 		review.setBook(book);
 		review.setCustomer(customer);
-		review.setHeadline("Great book");
-		review.setRating(5);
-		review.setComment("Easily understandable and no deviation from actual meaning exact words described");
+		review.setHeadline("This book is highly overhyped. Doesn't deserve all the hype");
+		review.setRating(2);
+		review.setComment("This print edition seems different from what I have seen in bookstores. The book is just 13x18 cms though it is hardcover as per listing and the page and print quality are good. Amazon delivered it in 5 days as usual.\r\n"
+				+ "The book is really overhyped and though it makes for good one-time reading to discover all the hype around it, it is of little practical use, as the lifestyle of inhabitants of Okinawa is vastly different from urban living we are used to.");
 		
 		Review newReview = reviewDAO.create(review);
 		

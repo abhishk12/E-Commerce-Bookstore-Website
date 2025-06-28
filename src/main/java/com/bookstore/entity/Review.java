@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 
 @Entity(name="review")
 @Table(name="review")
@@ -142,7 +143,21 @@ public class Review implements Serializable {
 	}
 
 
-	
+	@Transient
+	public String getStars() {
+		String result = "";
+		int numberOfStars = (int) rating;
+		
+		for(int i = 1 ; i <=numberOfStars; i++) {
+			result += "on,";
+		}
+
+		for(int i = numberOfStars+1 ; i <=5 ; i++) {
+			result += "off,";
+		}
+		
+		return result.substring(0, result.length()-1);
+	}
 	
 	
 }

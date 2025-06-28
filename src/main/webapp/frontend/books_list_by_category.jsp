@@ -21,7 +21,11 @@
 						
 					</div>
 					<div style="font-size:0.75em">
-						Rating ****
+						
+						<jsp:include page="book_rating.jsp"> 
+							<jsp:param value="${book.ratingStars}" name="ratingStars"/>
+						</jsp:include>
+						
 					</div>
 					<div style="font-size:0.75em;">
 						<i> ${book.author} </i> 

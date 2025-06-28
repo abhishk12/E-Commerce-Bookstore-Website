@@ -1,10 +1,12 @@
 package com.bookstore.entity;
 
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -185,7 +187,16 @@ public class Book {
 	
 	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
 	public Set<Review> getReview_ids() {
-		return review_ids;
+		TreeSet<Review> sortedReviews = new TreeSet<Review>(new Comparator<Review>() {
+			@Override
+			public int compare(Review o1, Review o2) {
+				
+				return o2.getReview_time().compareTo(o1.getReview_time());
+			}
+		});
+		sortedReviews.addAll(review_ids);
+		
+		return sortedReviews;
 	}
 
 	public void setReview_ids(Set<Review> review_ids) {
@@ -227,6 +238,52 @@ public class Book {
 			return false;
 		Book other = (Book) obj;
 		return book_id == other.book_id;
+	}
+	
+	
+	@Transient
+	public float getAverageRating() {
+		float averageRating = 0.0f;	
+		float sum = 0.0f;
+		
+		if(review_ids.isEmpty()) {
+			return 0.0f;
+		}
+		
+		for(Review review: review_ids) {
+			sum += review.getRating();
+		}
+		
+		averageRating = sum/review_ids.size();
+		
+		return averageRating;
+	}
+	
+	@Transient
+	public String getRatingString(float averageRating) {
+		String result = "";
+		int numberOfStars = (int) averageRating;
+		
+		for(int i = 1 ; i <=numberOfStars; i++) {
+			result += "on,";
+		}
+		int next = numberOfStars + 1;
+		if(averageRating > numberOfStars) {
+			result += "half,";
+			next++;
+		}
+		
+		for(int i = next ; i <=5 ; i++) {
+			result += "off,";
+		}
+		
+		return result.substring(0, result.length()-1);
+	}
+	
+	@Transient
+	public String getRatingStars() {
+		float averageRating = getAverageRating();
+		return getRatingString(averageRating);
 	}
 	
 }
