@@ -57,6 +57,11 @@ public class Book {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Book(int book_id) {
+		super();
+		this.book_id = book_id;
+	}
 
 	public Book(String title, String author, String description, String isbn, byte[] image, float price,
 			Date publish_date, Date last_update_time, Category category, Set<Review> review_ids,

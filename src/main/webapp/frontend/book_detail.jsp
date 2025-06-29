@@ -23,7 +23,7 @@
 						</jsp:include>
 						<a href="#review_section"> Reviews (${fn:length(bookDetail.review_ids)})</a>
 					</td>
-					<td valign="top" rowspan="2" width="20%"> Price: <span style="font-weight: 800;">&#8377;</span> ${bookDetail.price} <br><br> <button> Add to Cart </button></td>
+					<td valign="top" rowspan="2" width="20%"> Price: <span style="font-weight: 800;">&#8377;</span> ${bookDetail.price} <br><br> <button id="addToCart"> Add to Cart </button></td>
 
 				</tr>
 				
@@ -93,6 +93,9 @@
 	$(document).ready(function(){
 		$("#writeReviewButton").click(function(){
 			window.location = "write_review?book_id=" + ${bookDetail.book_id}; 
+		});
+		$("#addToCart").click(function(){
+			window.location = "add_to_cart?book_id=" + ${bookDetail.book_id}; 
 		});
 	});	
 	

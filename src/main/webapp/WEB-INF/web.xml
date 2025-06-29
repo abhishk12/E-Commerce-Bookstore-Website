@@ -3,27 +3,25 @@
 	<servlet>
 		<description>
 		</description>
-		<display-name>WriteReviewServlet</display-name>
-		<servlet-name>WriteReviewServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.frontend.review.WriteReviewServlet</servlet-class>
+		<display-name>UpdateCartServlet</display-name>
+		<servlet-name>UpdateCartServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.frontend.shoppingcart.UpdateCartServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
 		</description>
-		<display-name>SubmitReviewServlet</display-name>
-		<servlet-name>SubmitReviewServlet</servlet-name>
-		<servlet-class>com.bookstore.controller.frontend.review.SubmitReviewServlet</servlet-class>
+		<display-name>ClearCartServlet</display-name>
+		<servlet-name>ClearCartServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.frontend.shoppingcart.ClearCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>WriteReviewServlet</servlet-name>
-		<url-pattern>/WriteReviewServlet</url-pattern>
+		<servlet-name>UpdateCartServlet</servlet-name>
+		<url-pattern>/UpdateCartServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>SubmitReviewServlet</servlet-name>
-		<url-pattern>/SubmitReviewServlet</url-pattern>
+		<servlet-name>ClearCartServlet</servlet-name>
+		<url-pattern>/ClearCartServlet</url-pattern>
 	</servlet-mapping>
-
-
   <error-page>
     <error-code>404</error-code>
     <location>/error/404.jsp</location>
