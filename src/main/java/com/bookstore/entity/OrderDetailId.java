@@ -1,6 +1,7 @@
 package com.bookstore.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.FetchType;
@@ -45,6 +46,25 @@ public class OrderDetailId implements Serializable {
 
 	public void setBookOrder(BookOrder bookOrder) {
 		this.bookOrder = bookOrder;
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(book, bookOrder);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderDetailId other = (OrderDetailId) obj;
+		return Objects.equals(book, other.book) && Objects.equals(bookOrder, other.bookOrder);
 	}
 	
 	

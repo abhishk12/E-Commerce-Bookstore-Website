@@ -60,6 +60,7 @@ public class OrderDetail implements Serializable {
 
 	public void setBook(Book book) {
 		this.book = book;
+		this.id.setBook(book);
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -71,6 +72,7 @@ public class OrderDetail implements Serializable {
 
 	public void setBookOrder(BookOrder bookOrder) {
 		this.bookOrder = bookOrder;
+		this.id.setBookOrder(bookOrder);
 	}
 
 	@Column(name = "quantity")

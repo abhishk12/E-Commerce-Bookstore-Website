@@ -3,8 +3,13 @@ package com.bookstore.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,9 +22,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 
 @Entity(name="book_order")
 @Table(name="book_order")
+@NamedQueries({
+	@NamedQuery(name="bookOrder.findAll", query = "SELECT bo FROM book_order bo ORDER BY bo.order_date DESC"),
+	@NamedQuery(name="bookOrder.countAll", query = "SELECT COUNT(*) FROM book_order")
+})
 public class BookOrder implements Serializable {
 	
 	private int order_id;
@@ -162,7 +172,7 @@ public class BookOrder implements Serializable {
 		this.status = status;
 	}
 
-	@OneToMany(mappedBy = "bookOrder", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "bookOrder", fetch = FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
 	public Set<OrderDetail> getOrder_details() {
 		return order_details;
 	}
@@ -170,6 +180,34 @@ public class BookOrder implements Serializable {
 
 	public void setOrder_details(Set<OrderDetail> order_details) {
 		this.order_details = order_details;
+	}
+	
+	@Transient
+	public int getBookCopies() {
+		int total = 0;
+		
+		for(OrderDetail orderDetail: order_details) {
+			total += orderDetail.getQuantity();
+		}
+		return total;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(order_id);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BookOrder other = (BookOrder) obj;
+		return order_id == other.order_id;
 	}
 	
 	

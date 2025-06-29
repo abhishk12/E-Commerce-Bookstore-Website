@@ -14,6 +14,20 @@
 		<servlet-name>ClearCartServlet</servlet-name>
 		<servlet-class>com.bookstore.controller.frontend.shoppingcart.ClearCartServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ListOrderServlet</display-name>
+		<servlet-name>ListOrderServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.admin.order.ListOrderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ViewOrderDetailServlet</display-name>
+		<servlet-name>ViewOrderDetailServlet</servlet-name>
+		<servlet-class>com.bookstore.controller.admin.order.ViewOrderDetailServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>UpdateCartServlet</servlet-name>
 		<url-pattern>/UpdateCartServlet</url-pattern>
@@ -21,6 +35,14 @@
 	<servlet-mapping>
 		<servlet-name>ClearCartServlet</servlet-name>
 		<url-pattern>/ClearCartServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ListOrderServlet</servlet-name>
+		<url-pattern>/ListOrderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ViewOrderDetailServlet</servlet-name>
+		<url-pattern>/ViewOrderDetailServlet</url-pattern>
 	</servlet-mapping>
   <error-page>
     <error-code>404</error-code>
