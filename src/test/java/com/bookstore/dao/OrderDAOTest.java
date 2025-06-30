@@ -92,8 +92,8 @@ class OrderDAOTest {
 
 	@Test
 	void testUpdateBookOrder() {
-		BookOrder order = orderDAO.get(25);
-		order.setTotal(1664.60f);
+		BookOrder order = orderDAO.get(26);
+		order.setRecipient_name("Customer One");
 		
 		BookOrder updatedOrder = orderDAO.update(order);
 		assertEquals(order.getTotal(), updatedOrder.getTotal());

@@ -19,7 +19,7 @@ import jakarta.servlet.ServletResponse;
 public class CustomerLoginFilter extends HttpFilter {
 	
 	private static final String[] loginRequiredURLs = {"/view_profile", "/edit_profile",
-			"/update_profile", "/write_review"};
+			"/update_profile", "/write_review", "/checkout", "/place_order"};
        
     public CustomerLoginFilter() {
         super();

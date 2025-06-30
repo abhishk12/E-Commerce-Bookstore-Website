@@ -83,7 +83,7 @@
 							</td>
 							
 							<td>
-								<a href="">Checkout</a>
+								<a href="checkout">Checkout</a>
 							</td>
 						</tr>
 					</table>

@@ -4,7 +4,6 @@
 	<br><br>
 	
 	<p> <i>${message}</i> </p>
-	<p> Click <a href="login">here</a> to login</p>
 	
 	<br><br>
 	

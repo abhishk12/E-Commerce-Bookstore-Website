@@ -1,15 +1,25 @@
 package com.bookstore.service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import com.bookstore.controller.frontend.shoppingcart.ShoppingCart;
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.dao.UserDAO;
+import com.bookstore.entity.Book;
 import com.bookstore.entity.BookOrder;
+import com.bookstore.entity.Customer;
+import com.bookstore.entity.OrderDetail;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class OrderServices {
 	private OrderDAO orderDAO;
@@ -41,8 +51,63 @@ public class OrderServices {
 		request.setAttribute("pageTitle", "Order Details");
 		request.getRequestDispatcher("order_detail.jsp").forward(request, response);
 	}
-	
-	
-	
+
+
+	public void showCheckOutForm() throws ServletException, IOException {
+		request.setAttribute("pageTitle", "Checkout");
+		request.getRequestDispatcher("frontend/checkout.jsp").forward(request, response);
+		
+	}
+
+
+	public void placeOrder() throws ServletException, IOException {
+		String recipient_name = request.getParameter("recipient_name");
+		String recipient_phone = request.getParameter("recipient_phone");
+		String recipient_street_address = request.getParameter("recipient_street_address");
+		String recipient_city = request.getParameter("recipient_city");
+		String recipient_zipcode = request.getParameter("recipient_zipcode");
+		String recipient_country = request.getParameter("recipient_country");
+		String payment_method = request.getParameter("payment_method");
+		
+		BookOrder order = new BookOrder();
+		order.setRecipient_name(recipient_name);
+		order.setRecipient_phone(recipient_phone);
+		String shippingAddress = recipient_street_address + ", " + recipient_city + ", " + recipient_zipcode + ", " + recipient_country;          
+		order.setShipping_address(shippingAddress);
+		order.setPayment_method(payment_method);
+		
+		HttpSession session = request.getSession();
+		Customer customer = (Customer)session.getAttribute("loggedCustomer");
+		order.setCustomer(customer);
+		
+		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+		Map<Book, Integer> items = shoppingCart.getItems();
+		Iterator<Book> iterator  = items.keySet().iterator();
+		
+		Set<OrderDetail> order_details = new HashSet<OrderDetail>();
+		
+		while(iterator.hasNext()) {
+			Book book = iterator.next();
+			Integer quantity = items.get(book);
+			float subTotal = quantity*book.getPrice();
+			
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setBook(book);
+			orderDetail.setBookOrder(order);
+			orderDetail.setQuantity(quantity);
+			orderDetail.setSub_total(subTotal);
+			order_details.add(orderDetail);
+			
+		}
+		
+		order.setOrder_details(order_details);
+		order.setTotal(shoppingCart.getTotalAmount());
+		
+		orderDAO.create(order);
+		
+		shoppingCart.clear();
+		request.setAttribute("message", "Thank you. Your order has been received.");
+		request.getRequestDispatcher("frontend/message.jsp").forward(request, response);
+	}
 
 }

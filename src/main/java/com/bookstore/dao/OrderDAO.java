@@ -9,7 +9,6 @@ public class OrderDAO extends JpaDAO<BookOrder> implements GenericDAO<BookOrder>
 	
 	public BookOrder create(BookOrder order) {
 		order.setOrder_date(new Date());
-		order.setPayment_method("Pay on Delivery");
 		order.setStatus("Processing");
 		return super.create(order);
 	}
