@@ -123,5 +123,29 @@ class OrderDAOTest {
 		long cnt = orderDAO.count();
 		assertEquals(2, cnt);
 	}
+	
+	@Test
+	void testListByCustomersSuccess() {
+		List<BookOrder> orders = orderDAO.listByCustomer(13);
+		assertEquals(1, orders.size());
+	}
+	
+	@Test
+	void testListByCustomersFail() {
+		List<BookOrder> orders = orderDAO.listByCustomer(12);
+		assertEquals(0, orders.size());
+	}
+	
+	@Test
+	void testGetByIdAndCustomerSuccess() {
+		BookOrder order = orderDAO.get(25, 21);
+		assertNotNull(order);
+	}
+	
+	@Test
+	void testGetByIdAndCustomerFail() {
+		BookOrder order = orderDAO.get(25, 17);
+		assertNull(order);
+	}
 
 }

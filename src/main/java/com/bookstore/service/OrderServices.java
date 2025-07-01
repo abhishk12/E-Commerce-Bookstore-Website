@@ -110,4 +110,38 @@ public class OrderServices {
 		request.getRequestDispatcher("frontend/message.jsp").forward(request, response);
 	}
 
+
+	public void listOrderByCustomer() throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute("loggedCustomer");
+		request.setAttribute("pageTitle", "Order History");
+		List<BookOrder> orders = orderDAO.listByCustomer(customer.getCustomer_id());
+		request.setAttribute("listOrder", orders);
+		request.getRequestDispatcher("frontend/order_list.jsp").forward(request, response);
+		
+	}
+
+
+	public void showOrderDetailForCustomer() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("order_id"));
+		
+		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute("loggedCustomer");
+		BookOrder order = orderDAO.get(orderId, customer.getCustomer_id());
+		
+		
+		request.setAttribute("orderObj", order);
+		request.setAttribute("pagetTitle", "My Order Details");
+		request.getRequestDispatcher("frontend/order_detail.jsp").forward(request, response);
+		
+	}
+
 }
+
+
+
+
+
+
+
+

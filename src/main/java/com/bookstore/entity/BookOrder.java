@@ -28,7 +28,9 @@ import jakarta.persistence.Transient;
 @Table(name="book_order")
 @NamedQueries({
 	@NamedQuery(name="bookOrder.findAll", query = "SELECT bo FROM book_order bo ORDER BY bo.order_date DESC"),
-	@NamedQuery(name="bookOrder.countAll", query = "SELECT COUNT(*) FROM book_order")
+	@NamedQuery(name="bookOrder.countAll", query = "SELECT COUNT(*) FROM book_order"),
+	@NamedQuery(name="bookOrder.findByCustomer", query = "SELECT bo FROM book_order bo WHERE bo.customer.customer_id = :customerId ORDER BY bo.order_date DESC"),
+	@NamedQuery(name="bookOrder.findByIdAndCustomer", query="SELECT bo FROM book_order bo WHERE bo.order_id = :orderId AND bo.customer.customer_id = :custId")
 })
 public class BookOrder implements Serializable {
 	
