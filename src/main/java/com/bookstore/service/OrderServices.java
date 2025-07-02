@@ -136,6 +136,26 @@ public class OrderServices {
 		
 	}
 
+
+	public void showEditOrderForm() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("order_id"));
+		
+		HttpSession session = request.getSession();
+		
+		Object flag = session.getAttribute("NewBookAdded");
+		if(flag == null) {
+			BookOrder order = orderDAO.get(orderId);
+			session.setAttribute("orderObj", order);
+		}
+		else {
+			session.removeAttribute("NewBookAdded");
+		}
+		
+		request.setAttribute("pageTitle", "Edit Order");
+		request.getRequestDispatcher("order_form.jsp").forward(request, response);
+		
+	}
+
 }
 
 
