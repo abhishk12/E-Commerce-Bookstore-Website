@@ -97,7 +97,7 @@
 	</div>
 	<br>
 	<div align="center">
-		<a href="">Edit Order</a> &nbsp;| &nbsp; <a href="">Delete Order</a> 
+		<a href="edit_order?order_id=${orderObj.order_id}">Edit Order</a> &nbsp;| &nbsp; <a href="">Delete Order</a> 
 	</div>
 	
 	<hr width="60%">

@@ -2,6 +2,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <jsp:include page="header.jsp"></jsp:include>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js" integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="<%= request.getContextPath() %>/js/jquery.richtext.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js" integrity="sha512-KFHXdr2oObHKI9w4Hv1XPKc898mE4kgYx58oqsc/JqqdLMDI4YjOLzom+EMlW8HFUd0QfjfAvxSL6sEq/a42fQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/themes/base/jquery-ui.min.css" integrity="sha512-TFee0335YRJoyiqz8hA8KV3P0tXa5CpRBSoM0Wnkn7JoJx1kaq1yXL/rb8YFpWXkMOjRcv5txv+C6UluttluCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 	<br>
 	
@@ -32,12 +38,12 @@
 				
 				<tr> 
 					<td align="right"><b>Recipient Phone:</b></td>
-					<td> <input type="text" size="50" name="recipient_name" id="recipient_name" value="${orderObj.recipient_phone }"> </td>
+					<td> <input type="text" size="50" name="recipient_phone" id="recipient_phone" value="${orderObj.recipient_phone }"> </td>
 				</tr>
 				
 				<tr> 
 					<td align="right"><b>Shipping To:</b></td>
-					<td> <input type="text" size="50" name="recipient_name" id="recipient_name" value="${orderObj.shipping_address }"> </td>
+					<td> <input type="text" size="50" name="shipping_address" id="shipping_address" value="${orderObj.shipping_address }"> </td>
 				</tr>
 				
 				<tr> 
@@ -88,13 +94,16 @@
 						<td>${status.count }</td>
 						<td>${orderDetail.book.title }</td>
 						<td>${orderDetail.book.author }</td>
-						<td>${orderDetail.book.price }</td>
 						<td>
-							
-							<input type="text" size="5" name="quantity" id="quantity" value="${orderDetail.quantity }"/>
+							<input type="hidden" name="bookPrice" value="${orderDetail.book.price }">
+							${orderDetail.book.price }
+						</td>
+						<td>
+							<input type="hidden" name="bookId" value="${orderDetail.book.book_id }">
+							<input type="text" size="5" name="quantity${status.count}" id="quantity" value="${orderDetail.quantity }"/>
 						</td>
 						<td>${orderDetail.sub_total }</td>
-						<td> <a href="">Remove</a> </td>
+						<td> <a href="remove_book_from_order?book_id=${orderDetail.book.book_id}">Remove</a> </td>
 					</tr>
 				</c:forEach>
 				
@@ -115,7 +124,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" value="Confirm Edit">
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="Cancel">			
+			<input type="button" value="Cancel" onclick="javascript:window.location.href='list_orders';">			
 		</div>
 		
 	</form>
@@ -124,6 +133,35 @@
 	<br><br>
 
 <script type="text/javascript">
+	
+	$(document).ready(function(){
+		$("#updateOrderAdminForm").validate({
+			rules:{
+				recipient_name: "required",
+				recipient_phone: "required",
+				shipping_address: "required",
+				<c:forEach items="${orderObj.order_details}" var="orderDetail" varStatus="status">
+					quantity${status.count}: {
+						required: true,
+						number:true,
+						min:1
+					},
+				</c:forEach>
+			},
+			messages:{
+				recipient_name: "Please enter recipient name",
+				recipient_phone: "Please enter recipient phone",
+				shipping_address: "Please enter recipient address",
+				<c:forEach items="${orderObj.order_details}" var="orderDetail" varStatus="status">
+					quantity${status.count}: {
+						required: "Please enter quantity",
+						number: "Quantity must be a number",
+						min: "Quantity must be greater than zero."
+					},
+				</c:forEach>
+			}
+		});
+	});
 	
 	function showAddBookPopup(){
 		var width = 650;

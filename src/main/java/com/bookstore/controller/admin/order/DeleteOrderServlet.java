@@ -10,19 +10,19 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/view_order")
-public class ViewOrderDetailServlet extends HttpServlet {
+@WebServlet("/admin/delete_order")
+public class DeleteOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ViewOrderDetailServlet() {
+
+    public DeleteOrderServlet() {
         super();
 
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		OrderServices orderServices = new OrderServices(request, response);
-		System.out.println("In ViewOrderDetailsServlet servlet");
-		orderServices.viewOrderDetailsForAdmin();
+		orderServices.deleteOrder();
 	}
 
 }

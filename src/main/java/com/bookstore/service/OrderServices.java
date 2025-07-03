@@ -35,11 +35,19 @@ public class OrderServices {
 	}
 
 
-	public void listAllOrders() throws ServletException, IOException {
+	public void listAllOrders(String updateOrderMessage) throws ServletException, IOException {
 		List<BookOrder> listOrder = orderDAO.listAll();
+		if(updateOrderMessage!=null) {
+			request.setAttribute("updateOrderMessage", updateOrderMessage);
+		}
 		request.setAttribute("listOrder", listOrder);
 		request.setAttribute("pageTitle", "Order Management");
 		request.getRequestDispatcher("order_list.jsp").forward(request, response);
+		
+	}
+	
+	public void listAllOrders() throws ServletException, IOException {
+		listAllOrders(null);
 		
 	}
 
@@ -47,6 +55,7 @@ public class OrderServices {
 	public void viewOrderDetailsForAdmin() throws ServletException, IOException {
 		int orderId = Integer.parseInt(request.getParameter("order_id"));
 		BookOrder order = orderDAO.get(orderId);
+		System.out.println("In viewOrderDetailsForAdmin service - orderId: " + order.getOrder_id());
 		request.setAttribute("orderObj", order);
 		request.setAttribute("pageTitle", "Order Details");
 		request.getRequestDispatcher("order_detail.jsp").forward(request, response);
@@ -139,7 +148,7 @@ public class OrderServices {
 
 	public void showEditOrderForm() throws ServletException, IOException {
 		int orderId = Integer.parseInt(request.getParameter("order_id"));
-		
+		System.out.println("In showEditOrderForm service orderId: " + orderId);
 		HttpSession session = request.getSession();
 		
 		Object flag = session.getAttribute("NewBookAdded");
@@ -153,6 +162,68 @@ public class OrderServices {
 		
 		request.setAttribute("pageTitle", "Edit Order");
 		request.getRequestDispatcher("order_form.jsp").forward(request, response);
+		
+	}
+
+
+	public void updateOrder() throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		BookOrder order = (BookOrder) session.getAttribute("orderObj");
+		
+		String recipient_name = request.getParameter("recipient_name");
+		String recipient_phone = request.getParameter("recipient_phone");
+		String shipping_address = request.getParameter("shipping_address");
+		String payment_method = request.getParameter("payment_method");
+		String order_status = request.getParameter("order_status");
+		
+		order.setRecipient_name(recipient_name);
+		order.setRecipient_phone(recipient_phone);
+		order.setShipping_address(shipping_address);
+		order.setPayment_method(payment_method);
+		order.setStatus(order_status);
+		
+		String[] bookIds = request.getParameterValues("bookId");
+		String[] bookPrices = request.getParameterValues("bookPrice");
+		String[] quantities = new String[bookIds.length];
+		
+		for(int i = 0 ; i < quantities.length ; i++) {
+			int quantityIndex = i+1;
+			quantities[i] = request.getParameter("quantity" + quantityIndex);
+		}
+		
+		Set<OrderDetail> order_details = order.getOrder_details();
+		float totalAmount = 0.0f;
+		
+		order_details.clear();
+		for(int i = 0 ; i < bookIds.length ; i++) {
+			int bookId = Integer.parseInt(bookIds[i]);
+			int book_quantity = Integer.parseInt(quantities[i]);
+			float book_price = Float.parseFloat(bookPrices[i]);
+			float subTotal = book_price*book_quantity;
+			totalAmount += subTotal;
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setBook(new Book(bookId));
+			orderDetail.setQuantity(book_quantity);
+			orderDetail.setSub_total(subTotal);
+			orderDetail.setBookOrder(order);
+			
+			order_details.add(orderDetail);
+			
+		}
+		
+		order.setTotal(totalAmount);
+		orderDAO.update(order);
+
+		listAllOrders("Order updated successfully!");
+		
+		
+	}
+
+
+	public void deleteOrder() throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("id"));
+		orderDAO.delete(orderId);
+		listAllOrders("Order ID: " + orderId+ " deleted successfully!");
 		
 	}
 
