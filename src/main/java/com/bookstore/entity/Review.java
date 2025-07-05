@@ -25,8 +25,10 @@ import jakarta.persistence.Transient;
 	@NamedQuery(name = "review.listAll", query = "SELECT r FROM review r ORDER BY review_time DESC"),
 	@NamedQuery(name = "review.countAll", query = "SELECT COUNT(*) FROM review r"),
 	@NamedQuery(name = "review.findByCustomerAndBook", query = "SELECT r FROM review r WHERE r.customer.customer_id = :customerId AND"
-			+ " r.book.book_id = :bookId")
+			+ " r.book.book_id = :bookId"),
+	@NamedQuery(name = "review.mostFavoured", query = "SELECT r.book, COUNT(r.book.book_id) AS review_count, AVG(r.rating) AS avg_rating FROM review r GROUP BY r.book.book_id HAVING AVG(r.rating) >= 4.0 ORDER BY review_count DESC, avg_rating DESC")
 	})
+              
 public class Review implements Serializable {
 	
 	private int review_id;

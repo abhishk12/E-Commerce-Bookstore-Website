@@ -42,10 +42,80 @@
 	
 	<div align="center">
 		<h3>Best-Selling Books</h3> 
+		<div align="center" style="width:80%; margin: 0 auto;">
+			
+			<c:forEach items="${listBestSelling}" var="book">
+				<div style="display:inline-block; border: 1px solid grey; margin:10px; width:200px; padding:5px">
+					<div>
+						<a href="view_book?id=${book.book_id}">
+							<img alt="book cover here" src="data:image/jpg;base64,${book.base64Image}" width="100" height="150">
+						</a>
+						
+					</div>
+					<div style="font-size:0.80em">
+						<a href="view_book?id=${book.book_id}">
+							${book.title}
+						</a>
+						
+					</div>
+					<div style="font-size:0.75em">
+						<jsp:include page="book_rating.jsp"> 
+							<jsp:param value="${book.ratingStars}" name="ratingStars"/>
+						</jsp:include>
+						
+					
+					</div>
+					<div style="font-size:0.65em;">
+						<i> by ${book.author} </i> 
+					</div>
+					<div style="font-size:0.75em">
+						&#8377; ${book.price}
+					</div>
+				</div>
+			</c:forEach>
+			
+		</div>
+		
+		
 	</div>
 	
 	<div align="center">
-		<h3>Most-favored Books</h3> 
+		<h3>Most-favored Books</h3>
+		
+		<div align="center" style="width:80%; margin: 0 auto;">
+			
+			<c:forEach items="${mostFavoured}" var="book">
+				<div style="display:inline-block; border: 1px solid grey; margin:10px; width:200px; padding:5px">
+					<div>
+						<a href="view_book?id=${book.book_id}">
+							<img alt="book cover here" src="data:image/jpg;base64,${book.base64Image}" width="100" height="150">
+						</a>
+						
+					</div>
+					<div style="font-size:0.80em">
+						<a href="view_book?id=${book.book_id}">
+							${book.title}
+						</a>
+						
+					</div>
+					<div style="font-size:0.75em">
+						<jsp:include page="book_rating.jsp"> 
+							<jsp:param value="${book.ratingStars}" name="ratingStars"/>
+						</jsp:include>
+						
+					
+					</div>
+					<div style="font-size:0.65em;">
+						<i> by ${book.author} </i> 
+					</div>
+					<div style="font-size:0.75em">
+						&#8377; ${book.price}
+					</div>
+				</div>
+			</c:forEach>
+			
+		</div>	
+	 
 	</div>
 	<br><br>
 <jsp:include page="footer.jsp"></jsp:include>

@@ -2,6 +2,9 @@ package com.bookstore.entity;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
@@ -14,6 +17,9 @@ import jakarta.persistence.Table;
 
 @Entity(name="order_detail")
 @Table(name="order_detail")
+@NamedQueries({
+	@NamedQuery(name="bookOrder.bestSelling", query = "SELECT bo.book FROM order_detail bo GROUP BY bo.book.book_id ORDER BY SUM(bo.quantity) DESC"),
+})
 public class OrderDetail implements Serializable {
 	
 	private OrderDetailId id = new OrderDetailId();

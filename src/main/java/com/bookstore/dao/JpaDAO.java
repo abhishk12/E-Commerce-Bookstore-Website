@@ -178,6 +178,22 @@ public class JpaDAO<E> {
 		
 	}
 	
+	public List<Object[]> findWithNamedQueryObjects(String queryName, int firstResult, int maxResults) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		try {
+			Query query = entityManager.createNamedQuery(queryName);
+			query.setFirstResult(firstResult);
+			query.setMaxResults(maxResults);
+			List<Object[]> results = query.getResultList();
+			
+			return results;
+		}
+		finally {
+			entityManager.close();
+		}
+		
+	}
+	
 	public void close() {
 		if(entityManagerFactory != null) {
 			entityManagerFactory.close();

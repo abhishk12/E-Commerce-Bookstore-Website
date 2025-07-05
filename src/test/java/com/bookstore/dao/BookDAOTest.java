@@ -204,4 +204,18 @@ class BookDAOTest {
 		assertTrue(cnt>0);	
 	}
 	
+	@Test()
+	void testListBestSellingBooks() {
+		List<Book> listBooks = bookDAO.listBestSellingBooks();
+		assertEquals(4, listBooks.size());
+	}
+	
+	@Test()
+	void testListMostFavouredBooks() {
+		List<Book> listBooks = bookDAO.listMostFavouredBooks();
+		assertEquals(4, listBooks.size());
+	}
+	
 }
+
+

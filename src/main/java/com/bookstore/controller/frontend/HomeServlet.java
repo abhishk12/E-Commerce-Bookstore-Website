@@ -26,6 +26,10 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BookDAO bookDAO = new BookDAO();
 		List<Book> newBooks = bookDAO.listNewBooks();
+		List<Book> bestSelling = bookDAO.listBestSellingBooks();
+		List<Book> mostFavoured = bookDAO.listMostFavouredBooks();
+		request.setAttribute("mostFavoured", mostFavoured);
+		request.setAttribute("listBestSelling", bestSelling);
 		request.setAttribute("listNewBooks", newBooks);
 		
 //		CategoryDAO categoryDAO = new CategoryDAO();
