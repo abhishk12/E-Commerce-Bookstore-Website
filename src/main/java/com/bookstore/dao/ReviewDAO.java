@@ -50,5 +50,16 @@ public class ReviewDAO extends JpaDAO<Review> implements GenericDAO<Review> {
 		return null;
 		
 	}
+	
+	public List<Review> listMostRecentReviews() {
+		return super.findWithNamedQuery("review.listAll", 0, 3);
+	}
 
 }
+
+
+
+
+
+
+
